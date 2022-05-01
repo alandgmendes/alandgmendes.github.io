@@ -15,7 +15,7 @@ function HomePage() {
         <p className="itens-profile-card">Alandouglas Godinho Mendes</p>
         <p className="itens-profile-card">Desenvolvedor de software</p>
         <p className="itens-profile-card">Estudante de física</p>
-        <p className="itens-profile-card">Apaixonado por análise/ciência de dados</p>
+        <p className="itens-profile-card">Apaixonado por análise/ciência de dados!</p>
         <a className="icons-profile-card" href="https://www.linkedin.com/in/alandgmendes/"><span><FontAwesomeIcon className="icons-profile-card" icon={faLinkedin} /></span></a>
         </div>
         <div className='col-center-perfil'>
