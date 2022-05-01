@@ -50,6 +50,16 @@ h5 {
   background-color: antiquewhite;
   border-radius: 30px;
 }
+.icons-profile-card{
+  background-color: antiquewhite;
+  border-radius: 30px;
+  padding: auto;
+  width: 30%;
+  height: 30%;
+}
+.itens-profile-card:hover{
+  background-color: #9922dd;
+}
 .col-center-perfil{
 
   padding: 2;

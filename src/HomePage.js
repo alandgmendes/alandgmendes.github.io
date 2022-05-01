@@ -1,8 +1,7 @@
-import logo from './logo.svg';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import profilePicture from './images/profile.jpeg';
-import './HomePage.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import profilePicture from './images/profile.jpeg'
+import './HomePage.css'
 
 function HomePage() {
   
@@ -17,6 +16,7 @@ function HomePage() {
         <p className="itens-profile-card">Desenvolvedor de software</p>
         <p className="itens-profile-card">Estudante de física</p>
         <p className="itens-profile-card">Apaixonado por análise/ciência de dados</p>
+        <a className="icons-profile-card" href="https://www.linkedin.com/in/alandgmendes/"><span><FontAwesomeIcon className="icons-profile-card" icon={faLinkedin} /></span></a>
         </div>
         <div className='col-center-perfil'>
           <p>at is Lorem Ipsum?
