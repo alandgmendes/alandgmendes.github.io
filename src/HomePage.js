@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import './HomePage.css'
 
 function HomePage() {
-  const [urlRequest, setUrlRequest] = useState("-");
+  const [urlRequest, setUrlRequest] = useState("");
   const [urlResult, setUrlResult] = useState("");
   const [clientId, setClientId] = useState("");
   var myHeaders = new Headers();
