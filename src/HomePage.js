@@ -26,7 +26,7 @@ function HomePage() {
   }
   const infoUrl = "https://api-v2.seletobank.com.br/contadigital/info";
   const extratoUrl = "https://api-v2.seletobank.com.br/contadigital/recebimentos/transacoes/extrato";
-  const transacaoUrl = "https://api-v2.seletobank.com.br/contadigital/transacoes/info/128c1bdb592a4a73a0450d001184ffde";
+  const transacaoUrl = "https://api-v2.seletobank.com.br/contadigital/transacoes/info/";
   const runRequest = () =>{
     fetch(urlRequest, requestOptions)
     .then(response => response.text())
