@@ -26,10 +26,12 @@ function HomePage() {
   }
   const infoUrl = "https://api-v2.seletobank.com.br/contadigital/info";
   const extratoUrl = "https://api-v2.seletobank.com.br/contadigital/recebimentos/transacoes/extrato";
+  const transacaoUrl = "https://api-v2.seletobank.com.br/contadigital/transacoes/info/128c1bdb592a4a73a0450d001184ffde";
   const runRequest = () =>{
     fetch(urlRequest, requestOptions)
     .then(response => response.text())
     .then(result => {
+      console.log(result);
         const obj = JSON.parse(result);
         const builder = Object.entries(obj);
         const structure = builder.map(item =><p key={item[0]+item[1]}><span>{item[0] + ": => "+ item[1]}</span></p>);
@@ -44,13 +46,17 @@ function HomePage() {
       <body> 
         <div >
           <div>
-            <p>info url: </p>
+            <p>Info url: </p>
             <p>{infoUrl}</p>
           </div>
           <br />
           <div>
-            <p>extrato url: </p>
+            <p>Extrato url: </p>
             <p>{extratoUrl}</p>
+          </div>
+          <div>
+            <p>Transação url: </p>
+            <p>{transacaoUrl}</p>
           </div>
           <div>
             <p>Digite clientId: </p>
