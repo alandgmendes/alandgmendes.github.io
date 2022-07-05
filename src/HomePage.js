@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import ChatBot from 'react-simple-chatbot';
 import profilePicture from './images/profile.jpeg'
+import Select from 'react-select'
 import React, { useState } from 'react';
 import './HomePage.css'
 
@@ -9,7 +10,16 @@ function HomePage() {
   const [urlRequest, setUrlRequest] = useState("");
   const [urlResult, setUrlResult] = useState("");
   const [hash, setHash] = useState("");
+  const [endPoint, setEndPoint] = useState(0);
   const [clientId, setClientId] = useState("");
+  
+
+  const options = [
+    { value: 0, label: '-----' },
+    { value: 1, label: 'Info Cliente' },
+    { value: 2, label: 'Extrato' },
+    { value: 3, label: 'Transação' },
+  ]
   var myHeaders = new Headers();
   myHeaders.append("ClientID", clientId);
 
@@ -28,11 +38,28 @@ function HomePage() {
   const hashChange = (e) =>{
     setHash(e.target.value);
   }
+  const optionsChange = (e) =>{
+    setEndPoint(e.value);
+  }
   const infoUrl = "https://api-v2.seletobank.com.br/contadigital/info";
   const extratoUrl = "https://api-v2.seletobank.com.br/contadigital/recebimentos/transacoes/extrato";
   const transacaoUrl = "https://api-v2.seletobank.com.br/contadigital/transacoes/info/";
   const runRequest = () =>{
-    const transactStr = transacaoUrl + hash;
+    let transactStr = "";
+    switch(endPoint){
+      case 1:
+          transactStr = "https://api-v2.seletobank.com.br/contadigital/info";
+          break;
+      case 2:
+          transactStr = "https://api-v2.seletobank.com.br/contadigital/recebimentos/transacoes/extrato";
+          break;
+      case 3:
+          transactStr = "https://api-v2.seletobank.com.br/contadigital/transacoes/info/" + hash;
+          break;
+      default:
+        break;
+    }
+    
     fetch(transactStr, requestOptions)
     .then(response => response.text())
     .then(result => {
@@ -49,32 +76,17 @@ function HomePage() {
   return (
     <div className="App" >
       <body> 
-        <div >
+        <div >                   
           <div>
-            <p>Info url: </p>
-            <p>{infoUrl}</p>
-          </div>
-          <br />
-          <div>
-            <p>Extrato url: </p>
-            <p>{extratoUrl}</p>
-          </div>
-          <div>
-            <p>Transação url: </p>
-            <p>{transacaoUrl}</p>
-          </div>
-          <div>
+          <Select options={options} onChange={e => optionsChange(e)}/>
             <p>Digite clientId: </p>
             <input value={clientId} id="urlInput" onChange={e => inputClientIdChange(e)}/>        
           </div>
-          <div>
+          {endPoint === 3 &&<div>
             <p>Digite hash: </p>
             <input value={hash} id="hashInput" onChange={e => hashChange(e)}/>        
-          </div>
-          <div>
-            <p>Digite url da request:</p>
-            <input value={urlRequest} id="urlInput" onChange={e => inputUrlChange(e)}/>
-          </div>
+          </div>}
+          
         
         
         <button onClick={runRequest}>Executar</button>
@@ -145,3 +157,4 @@ function HomePage() {
 }
 
 export default HomePage;
+
