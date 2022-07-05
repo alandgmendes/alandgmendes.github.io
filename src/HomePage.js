@@ -8,9 +8,10 @@ import './HomePage.css'
 function HomePage() {
   const [urlRequest, setUrlRequest] = useState("");
   const [urlResult, setUrlResult] = useState("");
+  const [hash, setHash] = useState("");
   const [clientId, setClientId] = useState("");
   var myHeaders = new Headers();
-    myHeaders.append("ClientID", clientId);
+  myHeaders.append("ClientID", clientId);
 
   var requestOptions = {
     method: 'GET',
@@ -24,11 +25,15 @@ function HomePage() {
   const inputClientIdChange = (e) =>{
     setClientId(e.target.value);
   }
+  const hashChange = (e) =>{
+    setHash(e.target.value);
+  }
   const infoUrl = "https://api-v2.seletobank.com.br/contadigital/info";
   const extratoUrl = "https://api-v2.seletobank.com.br/contadigital/recebimentos/transacoes/extrato";
   const transacaoUrl = "https://api-v2.seletobank.com.br/contadigital/transacoes/info/";
   const runRequest = () =>{
-    fetch(urlRequest, requestOptions)
+    const transactStr = transacaoUrl + hash;
+    fetch(transactStr, requestOptions)
     .then(response => response.text())
     .then(result => {
       console.log(result);
@@ -61,6 +66,10 @@ function HomePage() {
           <div>
             <p>Digite clientId: </p>
             <input value={clientId} id="urlInput" onChange={e => inputClientIdChange(e)}/>        
+          </div>
+          <div>
+            <p>Digite hash: </p>
+            <input value={hash} id="hashInput" onChange={e => hashChange(e)}/>        
           </div>
           <div>
             <p>Digite url da request:</p>
