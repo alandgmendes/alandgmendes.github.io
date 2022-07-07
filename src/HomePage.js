@@ -49,27 +49,43 @@ function HomePage() {
     switch(endPoint){
       case 1:
           transactStr = "https://api-v2.seletobank.com.br/contadigital/info";
+          fetch(transactStr, requestOptions)
+          .then(response => response.text())
+          .then(result => {
+              const obj = JSON.parse(result);
+              const builder = Object.entries(obj);
+              const structure = builder.map(item =><p key={item[0]+item[1]}><span>{item[0] + ": => "+ item[1]}</span></p>);
+              setUrlResult(structure);
+            })
+          .catch(error => console.log('error', error));
           break;
       case 2:
           transactStr = "https://api-v2.seletobank.com.br/contadigital/recebimentos/transacoes/extrato";
+          fetch(transactStr, requestOptions)
+          .then(response => response.text())
+          .then(result => {
+              const obj = JSON.parse(result);
+              const builder = Object.entries(obj);
+              const structure = builder.map(item =><p key={item[0]+item[1]}><span>{item[0] + ": => "+ item[1]}</span></p>);
+              setUrlResult(structure);
+            })
+          .catch(error => console.log('error', error));
           break;
       case 3:
           transactStr = "https://api-v2.seletobank.com.br/contadigital/transacoes/info/" + hash;
+          fetch(transactStr, requestOptions)
+          .then(response => response.text())
+          .then(result => {
+            console.log(result);
+              const obj = JSON.parse(result);
+              const builder = Object.entries(obj);
+              setUrlResult(JSON.stringify(builder));
+            })
+          .catch(error => console.log('error', error));
           break;
       default:
         break;
-    }
-    
-    fetch(transactStr, requestOptions)
-    .then(response => response.text())
-    .then(result => {
-      console.log(result);
-        const obj = JSON.parse(result);
-        const builder = Object.entries(obj);
-        const structure = builder.map(item =><p key={item[0]+item[1]}><span>{item[0] + ": => "+ item[1]}</span></p>);
-        setUrlResult(structure);
-      })
-    .catch(error => console.log('error', error));
+    } 
 
   }
   
@@ -157,4 +173,8 @@ function HomePage() {
 }
 
 export default HomePage;
+
+//exemplo transação ativa
+//a67215d6-37d9-47dc-ba5e-c63c1b9fddbd
+
 
